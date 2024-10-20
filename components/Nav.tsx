@@ -13,10 +13,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
+import { AppLogo } from "./AppLogo";
 import Link from "next/link";
-import Image from "next/image";
-import logo_light from "@/public/logo-light.png";
-import logo_dark from "@/public/logo-dark.png";
+
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -53,13 +52,13 @@ const components: { title: string; href: string; description: string }[] = [
 export function Nav() {
   return (
     <nav className="w-full  flex gap-4  px-8 justify-between py-4 items-center">
-      <Link href={"./"}>
+      <Link href={"./"} className="flex">
+       <AppLogo />
 
-          <Image src={logo_light} alt="" className="w-20 cursor-pointer dark:hidden" width = {70} height={50} unoptimized />
-          <Image src={logo_dark} alt="" className="w-fit cursor-pointer hidden dark:block" width = {70} height={50} unoptimized />
+      <div className="font-extrabold text-2xl font-sans ">MEMO</div>
       </Link>
 
-      <NavigationMenu>
+      <NavigationMenu className="lg:block hidden ">
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
