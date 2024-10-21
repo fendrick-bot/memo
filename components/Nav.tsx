@@ -50,7 +50,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function Nav() {
   return (
-    <nav className="w-full  flex gap-4  px-4 justify-between py-4 items-center">
+    <nav className="w-full  flex gap-4   justify-between items-center">
       <Link href={"./"} className="flex">
         <AppLogo />
 
