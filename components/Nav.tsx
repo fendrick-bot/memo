@@ -16,46 +16,45 @@ import {
 import { AppLogo } from "./AppLogo";
 import Link from "next/link";
 
-
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Infix to Prefix",
-    href: "/docs/primitives/alert-dialog",
+    title: "Convert Between Notations",
+    href: "/docs",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "Easily switch between infix, prefix, and postfix notations.",
   },
   {
-    title: "Infix to Postfix",
-    href: "/docs/primitives/hover-card",
+    title: "Evaluate Expressions",
+    href: "/docs",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Quickly compute the results of your expressions.",
   },
   {
-    title: "Prefix to Infix",
-    href: "/docs/primitives/progress",
+    title: "User-Friendly Interface",
+    href: "/docs",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Intuitive design for seamless navigation and use.",
   },
   {
-    title: "Postfix to Infix",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "Instant Results",
+    href: "/docs",
+    description: "Get conversions and evaluations in real-time.",
   },
   {
-    title: "Postfix Evaluation",
-    href: "/docs/primitives/tabs",
+    title: "Secure and Private",
+    href: "/docs",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      " All computations are performed locally in your browser.",
   },
 ];
 
 export function Nav() {
   return (
-    <nav className="w-full  flex gap-4  px-8 justify-between py-4 items-center">
+    <nav className="w-full  flex gap-4  px-4 justify-between py-4 items-center">
       <Link href={"./"} className="flex">
-       <AppLogo />
+        <AppLogo />
 
-      <div className="font-extrabold text-2xl font-sans ">MEMO</div>
+        <div className="font-extrabold text-2xl ">memo</div>
       </Link>
 
       <NavigationMenu className="lg:block hidden ">
@@ -67,29 +66,33 @@ export function Nav() {
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      className="flex h-full w-full select-none flex-col justify-start rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
-                      {/* <Icons.logo className="h-6 w-6" /> */}
-                      <div className="mb-2 mt-4 text-lg font-medium">
+                      <div className="mb-2 mt-2 text-lg font-medium">
                         Memo App
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        Beautifully designed app to calculate the polish
-                        notation of various equations including prefix, postfix
-                        and infix notation as well as the evaluation.
+                        A Polish Notation Converter! This tool is designed to
+                        help you effortlessly convert and evaluate expressions
+                        in various forms of Polish notation.
                       </p>
                     </a>
                   </NavigationMenuLink>
                 </li>
                 <ListItem href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
+                  Polish notation, also known as prefix notation, places
+                  operators before their operands.
                 </ListItem>
-                <ListItem href="/docs/installation" title="Installation">
-                  How to install dependencies and structure your app.
+                <ListItem href="/docs/installation" title="How to use">
+                  Input your arithmetic expression in the designated field.
+                  Choose the notation type you want to convert to or evaluate.
+                  Hit the button to see the converted expression or the
+                  evaluated result. The converted expression or result will be
+                  displayed instantly.
                 </ListItem>
-                <ListItem href="/docs/primitives/typography" title="Typography">
-                  Styles for headings, paragraphs, lists...etc
+                <ListItem href="/docs/primitives/typography" title="Examples">
+                Evaluate Prefix: Evaluate (+ 3 * 4 2) to get 11 
                 </ListItem>
               </ul>
             </NavigationMenuContent>
@@ -113,14 +116,14 @@ export function Nav() {
           <NavigationMenuItem>
             <Link href="/docs" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                About us
+                Documentation
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex items-center gap-3">
-        <Button>Log In</Button>
+        <Button>Get Started →</Button>
         <ModeToggle />
       </div>
     </nav>
