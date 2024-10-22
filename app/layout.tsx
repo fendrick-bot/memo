@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import {Poppins} from "@next/font/google"
+import { Poppins } from "@next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
+import { Nav } from "@/components/Nav";
+import Image from "next/image";
+import boy_study_home from "@/public/boy_study_home.png";
 
 const poppins = Poppins({
-  subsets : ['latin'],
-  weight :['100', '200', '300','400','700','500','800','600', '900'],
-})
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "700", "500", "800", "600", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,16 +23,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={poppins.className}
-      >
+      <body className={`${poppins.className}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="w-full h-screen absolute -z-10 bg-gradient-to-r from-purple-300 via-blue-200 to-indigo-200 animated-background opacity-40 blur-2xl"></div>
+          <main className="box-border p-6 ">
+            <Nav />
+            {children}
+          </main>
+          <Image
+        src={boy_study_home}
+        alt="boy study home"
+        className="relative w-full"
+        unoptimized
+        
+      />
         </ThemeProvider>
       </body>
     </html>

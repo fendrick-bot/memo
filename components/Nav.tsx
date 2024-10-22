@@ -54,13 +54,13 @@ export function Nav() {
       <Link href={"./"} className="flex">
         <AppLogo />
 
-        <div className="font-extrabold text-2xl ">memo</div>
+        <div className="font-bold text-2xl ">memo</div>
       </Link>
 
       <NavigationMenu className="md:block hidden ">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="bg-transparent">Getting started</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-2 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
@@ -98,7 +98,7 @@ export function Nav() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Features</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="bg-transparent">Features</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                 {components.map((component) => (
@@ -115,7 +115,7 @@ export function Nav() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={ `${navigationMenuTriggerStyle()} bg-transparent `}>
                 Documentation
               </NavigationMenuLink>
             </Link>
@@ -123,7 +123,7 @@ export function Nav() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex items-center gap-3">
-        <Button>Get Started →</Button>
+        <Button className="">Get Started →</Button>
         <ModeToggle />
       </div>
     </nav>
