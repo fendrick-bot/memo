@@ -21,7 +21,7 @@ export default function Home() {
         </p> */}
         <Convertor_in_post />
       <br />
-      <div className="grid grid-cols-2 w-fit m-auto gap-4 md:grid-cols-1 lg:grid-cols-2">
+      <div className="grid grid-cols-2 w-fit m-auto gap-4 md:grid-cols-3 lg:grid-cols-3">
         <Image
           src={convert_to_prefix}
           className="w-full rounded-2xl shadow-lg"
@@ -52,7 +52,7 @@ export default function Home() {
       <h1 className="text-xl font-bold text-center">- Conversions to Infix -</h1>
       <br />
       <br />
-      <div className="grid grid-cols-2 w-fit m-auto gap-4 md:grid-cols-2 lg:grid-cols-2">
+      <div className="grid grid-cols-2 w-fit m-auto gap-4 md:grid-cols-3 lg:grid-cols-3">
         
         <Image
           src={prefix_to_infix}
