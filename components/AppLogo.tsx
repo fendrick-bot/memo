@@ -7,7 +7,7 @@ export function AppLogo(){
     return (
         <div className="pr-1">
             <Image src={dark_logo} alt="Memo Logo" width={logo_size} height={logo_size} className="dark:hidden"/>
-            <Image src={light_logo} alt="Memo Logo" width={logo_size} height={logo_size} className="hidden dark:block" />
+            <Image src={dark_logo} alt="Memo Logo" width={logo_size} height={logo_size} className="hidden dark:block" />
         </div>
 
     )
