@@ -84,7 +84,7 @@ export function Convertor_in_post() {
   return (
     <div className="pt-8">
       <form onClick={convert} className="flex flex-col gap-4">
-        <Input onChange={setData} value={state} className="text-lg" placeholder="Postfix Evaluator" />
+        <Input onChange={setData} value={state} className="text-lg" placeholder="Postfix Evaluator" type="text" />
         <Button type="submit" className="py-6 w-3/6" >Convert</Button>
       </form>
       <h1 className="mt-4 text-xl">Results</h1>
