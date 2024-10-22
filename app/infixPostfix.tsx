@@ -26,7 +26,7 @@ const InfixPostfix = () => {
   function solveInfix(infix: string) {
     // ... rest of the function code
 
-    let precedence = {
+    const precedence = {
       "+": 1,
       "-": 1,
       "*": 2,
