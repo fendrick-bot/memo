@@ -50,10 +50,9 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function Nav() {
   return (
-    <nav className="w-full  flex gap-4   justify-between items-center">
+    <nav className="w-full flex gap-4 justify-between items-center px-6 py-4  fixed bg-gradient-to-b from-transparent  to-white backdrop-blur-md shadow-md">
       <Link href={"./"} className="flex">
         <AppLogo />
-
         <div className="font-bold text-2xl ">memo</div>
       </Link>
 
@@ -124,7 +123,7 @@ export function Nav() {
       </NavigationMenu>
       <div className="flex items-center gap-3">
         <Button className="">Get Started →</Button>
-        <ModeToggle />
+        <ModeToggle/>
       </div>
     </nav>
   );

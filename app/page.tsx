@@ -3,12 +3,12 @@ import convert_to_prefix from "@/public/convert_to_prefix.png";
 import convert_to_postfix from "@/public/convert_to_postfix.png";
 import postfix_to_infix from "@/public/postfix_to_infix.png";
 import prefix_to_infix from "@/public/prefix_to_infix.png";
-import InfixPostfix  from '@/app/infixPostfix'
+import { Convertor_in_post } from "@/components/Convertor_in_post";
 
 export default function Home() {
   return (
     <div className="w-full h-full mt-6 lg:w-1/2 m-auto min-h-[500px] ">
-      <hr className=" bg-black" />
+      <br />
       <br />
       <h1 className="font-bold text-3xl text-center w-full md:w-4/5 m-auto md:text-3xl">
         Online Polish Notation Calculator
@@ -19,7 +19,7 @@ export default function Home() {
         Polish notation, including prefix (Polish) and postfix (Reverse Polish)
         notations.
         </p> */}
-        <InfixPostfix />
+        <Convertor_in_post />
       <br />
       <div className="grid grid-cols-2 w-fit m-auto gap-4 md:grid-cols-1 lg:grid-cols-2">
         <Image
@@ -67,6 +67,7 @@ export default function Home() {
 
 
       </div>
+      <div className="h-screen"></div>
     </div>
   );
 }
