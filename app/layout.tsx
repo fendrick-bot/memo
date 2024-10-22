@@ -31,7 +31,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="w-full h-screen absolute -z-10 bg-gradient-to-r from-purple-300 via-blue-200 to-indigo-200 animated-background opacity-40 blur-2xl"></div>
-          <main className="box-border p-6 ">
+          <main className=" p-6 ">
             <Nav />
             {children}
           </main>
