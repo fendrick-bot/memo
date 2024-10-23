@@ -3,15 +3,57 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 
-export function Convertor_in_post() {
+export function Evaluate_in_res() {
   const [state, setState] = useState<string>("");
-  const [result, setResult] = useState<string>("");
+  const [result, setResult] = useState<number>(0.0);
 
   const setData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState(e.target.value);
   };
 
-  function solveInfix(infix: string) {
+  function Evaluate(str :string[]) : void{
+
+    let a: number, b: number, c: number;
+    const stack: number[] = [];
+
+    for(let i=0;i<str.length;i++){
+
+        if (str[i].localeCompare("+") === 0) {
+            a = stack.pop()!;
+            b = stack.pop()!;
+            c = b + a;  // Be mindful of the order in subtraction/division
+            stack.push(c);
+        } else if (str[i].localeCompare("-") === 0) {
+            a = stack.pop()!;
+            b = stack.pop()!;
+            c = b - a;  // subtract from correct order that is top -(top-1)
+            stack.push(c);
+        } else if (str[i].localeCompare("*") === 0) {
+            a = stack.pop()!;
+            b = stack.pop()!;
+            c = b * a;
+            stack.push(c);
+        } else if (str[i].localeCompare("/") === 0) {
+            a = stack.pop()!;
+            b = stack.pop()!;
+            c = b / a;   // divide to correct order that is top /(top-1)
+            stack.push(c);
+        } else {
+            // convert string to float and  store into the stack.
+            stack.push(parseFloat(str[i]));
+        }
+
+    }
+    setResult(stack[stack.length-1]);
+
+
+  }
+  
+    
+
+  
+
+  function solveInfix(infix :string) {
     const precedence = {
       "+": 1,
       "-": 1,
@@ -73,7 +115,10 @@ export function Convertor_in_post() {
       output.push(stack.pop());
     }
 
-    setResult(output.join(" "));
+    Evaluate(output);
+
+
+    
   }
 
   const convert = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -84,8 +129,8 @@ export function Convertor_in_post() {
   return (
     <div className="pt-8">
       <form onClick={convert} className="flex flex-col gap-4">
-        <Input onChange={setData} value={state} className="text-lg" placeholder="Postfix Converter" type="text" />
-        <Button type="submit" className="py-6 w-3/6" >Convert</Button>
+        <Input type="text" onChange={setData} value={state} className="text-lg" placeholder="Infix  Evaluator"   />
+        <Button type="submit" className="py-6 w-3/6" >Evaluate</Button>
       </form>
       <h1 className="mt-4 text-xl">Results</h1>
       <input

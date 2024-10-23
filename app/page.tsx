@@ -4,6 +4,7 @@ import convert_to_postfix from "@/public/convert_to_postfix.png";
 import postfix_to_infix from "@/public/postfix_to_infix.png";
 import prefix_to_infix from "@/public/prefix_to_infix.png";
 import { Convertor_in_post } from "@/components/Convertor_in_post";
+import {Evaluate_in_res} from "@/components/Evaluate_in_res";
 
 export default function Home() {
   return (
@@ -20,6 +21,8 @@ export default function Home() {
         notations.
         </p> */}
         <Convertor_in_post />
+        <br />
+        <Evaluate_in_res />
       <br />
       <div className="grid grid-cols-2 w-fit m-auto gap-4 md:grid-cols-3 lg:grid-cols-3">
         <Image
