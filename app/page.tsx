@@ -10,7 +10,7 @@ export default function Home() {
     <div className="w-full h-full mt-6 lg:w-1/2 m-auto min-h-[500px] ">
       <br />
       <br />
-      <h1 className="font-bold text-3xl text-center w-full md:w-4/5 m-auto md:text-3xl">
+      <h1 className="font-bold text-3xl text-center w-full md:w-4/5 m-auto md:text-4xl">
         Online Polish Notation Calculator
       </h1>
       {/* <p className="text-gray-600">
