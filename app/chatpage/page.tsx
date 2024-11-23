@@ -39,7 +39,7 @@ const ChatPage = () => {
         setError( 'An error occurred.');
       }
     } catch (err) {
-      setError('Failed to fetch data.');
+      setError('Failed to fetch data.' + err)
     } finally {
       setLoading(false);
     }

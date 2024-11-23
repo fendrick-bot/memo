@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
 
 export async function POST(req: NextRequest) {
-  const apiKey = process.env.GEMINI_API_KEY || "google_gemini_api_key";
+  
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
     const { prompt } = await req.json();
     if (!prompt) {
       return NextResponse.json(

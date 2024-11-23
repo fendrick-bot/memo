@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
-import { Prompt } from "@next/font/google";
 
 export function Convertor_in_post() {
   const [state, setState] = useState<string>("");
@@ -12,88 +11,88 @@ export function Convertor_in_post() {
     setState(e.target.value);
   };
 
-  function solveInfix(infix: string) {
-    const precedence = {
-      "+": 1,
-      "-": 1,
-      "*": 2,
-      "/": 2,
-      "^": 3,
-    };
+  // function solveInfix(infix: string) {
+  //   const precedence = {
+  //     "+": 1,
+  //     "-": 1,
+  //     "*": 2,
+  //     "/": 2,
+  //     "^": 3,
+  //   };
 
-    const isOperand = (c: string): boolean => c.match(/[a-z0-9]/i) !== null;
-    const isOperator = (c: string): boolean =>
-      ["+", "-", "*", "/", "^"].includes(c);
-    const output = [];
-    const stack = [];
+  //   const isOperand = (c: string): boolean => c.match(/[a-z0-9]/i) !== null;
+  //   const isOperator = (c: string): boolean =>
+  //     ["+", "-", "*", "/", "^"].includes(c);
+  //   const output = [];
+  //   const stack = [];
 
-    for (let i = 0; i < infix.length; i++) {
-      const char = infix[i];
+  //   for (let i = 0; i < infix.length; i++) {
+  //     const char = infix[i];
 
-      // If the character is an operand, add it to the output
-      if (isOperand(char)) {
-        output.push(char);
-      }
-      // If the character is '(', push it to the stack
-      else if (char == "(") {
-        stack.push(char);
-      }
-      // If the character is an operator
-      else if (isOperator(char)) {
-        while (
-          stack.length &&
-          precedence[stack[stack.length - 1] as keyof typeof precedence] >=
-            precedence[char as keyof typeof precedence]
-        ) {
-          output.push(stack.pop());
-        }
+  //     // If the character is an operand, add it to the output
+  //     if (isOperand(char)) {
+  //       output.push(char);
+  //     }
+  //     // If the character is '(', push it to the stack
+  //     else if (char == "(") {
+  //       stack.push(char);
+  //     }
+  //     // If the character is an operator
+  //     else if (isOperator(char)) {
+  //       while (
+  //         stack.length &&
+  //         precedence[stack[stack.length - 1] as keyof typeof precedence] >=
+  //           precedence[char as keyof typeof precedence]
+  //       ) {
+  //         output.push(stack.pop());
+  //       }
 
-        stack.push(char);
-      }
-      // If the character is ')', pop from the stack to the output until '(' is encountered
-      else if (char == ")") {
-        while (stack.length != 0 && stack[stack.length - 1] != "(") {
-          output.push(stack.pop());
-        }
-        stack.pop(); // Remove '(' from the stack
-      }
-      // If the character is an operator
-      else if (isOperator(char)) {
-        while (
-          stack.length !== 0 &&
-          precedence[stack[stack.length - 1] as keyof typeof precedence] >=
-            precedence[char as keyof typeof precedence]
-        ) {
-          output.push(stack.pop());
-        }
+  //       stack.push(char);
+  //     }
+  //     // If the character is ')', pop from the stack to the output until '(' is encountered
+  //     else if (char == ")") {
+  //       while (stack.length != 0 && stack[stack.length - 1] != "(") {
+  //         output.push(stack.pop());
+  //       }
+  //       stack.pop(); // Remove '(' from the stack
+  //     }
+  //     // If the character is an operator
+  //     else if (isOperator(char)) {
+  //       while (
+  //         stack.length !== 0 &&
+  //         precedence[stack[stack.length - 1] as keyof typeof precedence] >=
+  //           precedence[char as keyof typeof precedence]
+  //       ) {
+  //         output.push(stack.pop());
+  //       }
 
-        stack.push(char);
-      }
-    }
-    while (stack.length) {
-      output.push(stack.pop());
-    }
+  //       stack.push(char);
+  //     }
+  //   }
+  //   while (stack.length) {
+  //     output.push(stack.pop());
+  //   }
 
-    setResult(output.join(" "));
-  }
+  //   setResult(output.join(" "));
+  // }
 
-  const convert = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    solveInfix(state);
-  };
+  // const convert = (e: React.FormEvent<HTMLFormElement>): void => {
+  //   e.preventDefault();
+  //   solveInfix(state);
+  // };
 
-  const [prompt, setPrompt] = useState(""); // Store input from the user
-  const [response, setResponse] = useState(""); // Store the GPT response
-  const [loading, setLoading] = useState(false); // Show loading state
+  // const [prompt, setPrompt] = useState(""); // Store input from the user
+  // const [response, setResponse] = useState(""); // Store the GPT response
+  // const [loading, setLoading] = useState(false); // Show loading state
   const [error, setError] = useState(""); // Store any error
 
   const handleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     setError(""); // Clear previous errors
-    setResponse(""); // Clear previous response
+    // setResponse(""); // Clear previous response
 
     const prompt = `Convert the following infix expression ${state} to postfix expression the response should be in json string format and contains isValid which has boolean value , next the postfix expression and finally the error message if any.`;
 
@@ -110,7 +109,7 @@ export function Convertor_in_post() {
       const generateText = JSON.parse(data.response);
 
       if (res.ok) {
-        let resultJson = await generateText.candidates[0].content.parts[0]
+        const resultJson = await generateText.candidates[0].content.parts[0]
           .text;
           
               const resultData = JSON.parse(
@@ -131,9 +130,9 @@ export function Convertor_in_post() {
         setError("An error occurred.");
       }
     } catch (err) {
-      setError("Failed to fetch data.");
+      setError("Failed to fetch data." + err);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
