@@ -4,7 +4,7 @@ import convert_to_postfix from "@/public/convert_to_postfix.png";
 import postfix_to_infix from "@/public/postfix_to_infix.png";
 import prefix_to_infix from "@/public/prefix_to_infix.png";
 import { Convertor_in_post } from "@/components/Convertor_in_post";
-import { Evaluate_in_res } from "@/components/Evaluate_in_res";
+// import { Evaluate_in_res } from "@/components/Evaluate_in_res";
 import { Convertor_in_prefix } from "@/components/Convertor_in_prefix";
 import { Convertor_in_pretopost } from "@/components/Convertor_in_pretopost";
 import { Convertor_in_posttopre } from "@/components/Convertor_in_posttopre";
