@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
+import { Prompt } from "@next/font/google";
 
 export function Convertor_in_post() {
   const [state, setState] = useState<string>("");
-  const [result, setResult] = useState<string>("");
+  const [result, setResult] = useState<string>("No results found!");
 
   const setData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState(e.target.value);
@@ -81,21 +82,93 @@ export function Convertor_in_post() {
     solveInfix(state);
   };
 
+  const [prompt, setPrompt] = useState(""); // Store input from the user
+  const [response, setResponse] = useState(""); // Store the GPT response
+  const [loading, setLoading] = useState(false); // Show loading state
+  const [error, setError] = useState(""); // Store any error
+
+  const handleClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(""); // Clear previous errors
+    setResponse(""); // Clear previous response
+
+    const prompt = `Convert the following infix expression ${state} to postfix expression the response should be in json string format and contains isValid which has boolean value , next the postfix expression and finally the error message if any.`;
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: prompt }),
+      });
+
+      const data = await res.json();
+      const generateText = JSON.parse(data.response);
+
+      if (res.ok) {
+        let resultJson = await generateText.candidates[0].content.parts[0]
+          .text;
+          
+              const resultData = JSON.parse(
+                resultJson
+              );
+              console.log(resultData);
+        if (resultData.isValid) {
+          setResult(resultData.postfixExpression);
+        } else setError(resultData.errorMessage);
+        // setResult(generateText.candidates[0].content.parts[0].text); // Set the GPT response
+      } else {
+        // Check if error is an object, and extract the message
+        // const errorMessage =
+        //   typeof data.error === 'object'
+        //     ? data.error.message || JSON.stringify(data.error)
+        //     : data.error;
+
+        setError("An error occurred.");
+      }
+    } catch (err) {
+      setError("Failed to fetch data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="pt-8">
-      <form onClick={convert} className="flex flex-col gap-4">
-        <Input onChange={setData} value={state} className="text-lg" placeholder="Postfix Converter" type="text" />
-        <Button type="submit" className="py-6 w-3/6" >Convert</Button>
-      </form>
-      <h1 className="mt-4 text-xl">Results</h1>
-      <input
+      <div className="flex flex-col gap-4 w-3/5 shadow-xl p-4 rounded-md border-gray-100 border-4">
+        <h1 className="mt-4 text-xl font-bold">Infix to Postfix</h1>
+        <Input
+          onChange={setData}
+          value={state}
+          className="text-lg"
+          placeholder="Postfix Converter"
           type="text"
+        />
+        <textarea
+          value={error}
+          disabled
+          className=" my-1  py-2 px-2 rounded-md text-xl font-medium w-full border-0 border-dashed border-purple-700 text-red-600"
+        />
+
+        <Button
+          type="submit"
+          onClick={(e) => handleClick(e)}
+          className="py-6 w-3/6"
+        >
+          Convert
+        </Button>
+        <h1 className="mt-4 text-xl">Results :</h1>
+        <textarea
           name="postfix"
           value={result}
           disabled
-          className="h-16 my-3  py-2 px-3 rounded-md text-xl font-medium w-full border-0 border-dashed border-purple-700 text-gray-500"
+          className=" my-1  py-2 px-2 rounded-md text-xl font-medium w-full border-0 border-dashed border-purple-700 text-purple-800"
         />
-      
+      </div>
     </div>
   );
 }

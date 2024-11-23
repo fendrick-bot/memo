@@ -11,7 +11,7 @@ export function Evaluate_in_res() {
     setState(e.target.value);
   };
 
-  function Evaluate(str :string[]) : void{
+  function Evaluate(str: string): void {
 
     let a: number, b: number, c: number;
     const stack: number[] = [];
@@ -65,8 +65,8 @@ export function Evaluate_in_res() {
     const isOperand = (c: string): boolean => c.match(/[a-z0-9]/i) !== null;
     const isOperator = (c: string): boolean =>
       ["+", "-", "*", "/", "^"].includes(c);
-    const output = [];
-    const stack = [];
+    const output:string[]= [];
+    const stack:string[]= [];
 
     for (let i = 0; i < infix.length; i++) {
       const char = infix[i];
@@ -86,7 +86,7 @@ export function Evaluate_in_res() {
           precedence[stack[stack.length - 1] as keyof typeof precedence] >=
             precedence[char as keyof typeof precedence]
         ) {
-          output.push(stack.pop());
+          output.push(stack.pop()!);
         }
 
         stack.push(char);
@@ -94,7 +94,7 @@ export function Evaluate_in_res() {
       // If the character is ')', pop from the stack to the output until '(' is encountered
       else if (char == ")") {
         while (stack.length != 0 && stack[stack.length - 1] != "(") {
-          output.push(stack.pop());
+          output.push(stack.pop()!);
         }
         stack.pop(); // Remove '(' from the stack
       }
@@ -102,23 +102,20 @@ export function Evaluate_in_res() {
       else if (isOperator(char)) {
         while (
           stack.length !== 0 &&
-          precedence[stack[stack.length - 1] as keyof typeof precedence] >=
+          precedence[stack[stack.length - 1] as keyof typeof precedence] >= 
             precedence[char as keyof typeof precedence]
         ) {
-          output.push(stack.pop());
+          output.push(stack.pop()!);
         }
 
         stack.push(char);
       }
     }
     while (stack.length) {
-      output.push(stack.pop());
+      output.push(stack.pop()!);
     }
 
-    Evaluate(output);
-
-
-    
+    Evaluate(output.join(""));
   }
 
   const convert = (e: React.FormEvent<HTMLFormElement>): void => {

@@ -50,7 +50,9 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function Nav() {
   return (
-    <nav className="w-full flex gap-4 justify-between items-center px-6 py-4  fixed bg-gradient-to-b from-transparent  to-white backdrop-blur-md shadow-md dark:to-gray-800">
+
+    // w-full flex gap-4 justify-between items-center px-6 py-4  fixed bg-gradient-to-b from-transparent  to-white backdrop-blur-md shadow-md dark:to-gray-800
+    <nav className="w-full flex gap-4 justify-between items-center px-6 py-4   dark:to-gray-800">
       <Link href={"./"} className="flex">
         <AppLogo />
         <div className="font-bold text-2xl ">memo</div>
