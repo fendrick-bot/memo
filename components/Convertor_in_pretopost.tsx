@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 
-export function Convertor_in_post() {
+export function Convertor_in_pretopost() {
   const [state, setState] = useState<string>("");
   const [result, setResult] = useState<string>("No results found!");
 
@@ -94,7 +94,7 @@ export function Convertor_in_post() {
     setError(""); // Clear previous errors
     // setResponse(""); // Clear previous response
 
-    const prompt = `Convert the following infix expression ${state} to postfix expression the response should be in json string format and contains isValid which has boolean value , next the postfix expression and finally the error message if any. DO NOT USE MARKDOWN SYNTAX NO PREAMBLE ONLY STRING`;
+    const prompt = `Convert the following prefix expression ${state} to postfix expression the response should be in json string format and contains isValid which has boolean value , next the postfix expression and finally the error message if any. DO NOT USE MARKDOWN SYNTAX NO PREAMBLE ONLY STRING`;
 
     try {
       const res = await fetch("/api/chat", {
@@ -111,14 +111,14 @@ export function Convertor_in_post() {
       if (res.ok) {
         const resultJson = await generateText.candidates[0].content.parts[0]
           .text;
-          console.log(resultJson)
+          // console.log(resultJson)
           
               const resultData = JSON.parse(
                 resultJson
               );
               console.log(resultData);
         if (resultData.isValid) {
-          setResult(resultData.postfix);
+          setResult(resultData.postfixExpression);
         } else setError(resultData.errorMessage);
         // setResult(generateText.candidates[0].content.parts[0].text); // Set the GPT response
       } else {
@@ -136,21 +136,22 @@ export function Convertor_in_post() {
       // setLoading(false);
     }
   };
+console.log(result)
   return (
     <div className="pt-8">
       <div className="flex flex-col gap-4 shadow-xl p-4 rounded-md border-gray-100 border-4 w-[400px]">
-        <h1 className="mt-4 text-xl font-bold">Infix to Postfix</h1>
+        <h1 className="mt-4 text-xl font-bold">Prefix to Postfix</h1>
         <Input
           onChange={setData}
           value={state}
           className="text-lg"
-          placeholder="Postfix Converter"
+          placeholder="Prefix to Postfix"
           type="text"
         />
         <textarea
           value={error}
           disabled
-          className=" my-1  py-2 px-2 rounded-md text-xl font-medium w-full border-0 border-dashed border-gray-700 text-red-600"
+          className=" my-1  py-2 px-2 rounded-md text-xl font-medium w-full border-0 border-dashed border-purple-700 text-red-600"
         />
 
         <Button
@@ -165,7 +166,7 @@ export function Convertor_in_post() {
           name="postfix"
           value={result}
           disabled
-          className=" my-1  py-2 px-2 rounded-md text-xl font-medium w-full border-0 border-dashed border-grey-700 text-grey-800"
+          className=" my-1  py-2 px-2 rounded-md text-xl font-medium w-full border-0 border-dashed border-purple-700 text-grey-800"
         />
       </div>
     </div>
